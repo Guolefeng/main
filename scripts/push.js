@@ -15,29 +15,21 @@ if (!which('git')) {
 }
 
 if (test('-e', '.gitmodules')) {
-    if (exec('git submodule foreach git add .').code !== 0) {
-        logErrorAndExit('Error: Git submodule add failed')
+    if (exec('git submodule foreach "git add . || true"').code !== 0) {
+        logErrorAndExit('Error: Git submodule "add failed || true"')
     }
     
-    if (exec('git submodule foreach git commit -am "auto-commit"').code !== 0) {
+    if (exec('git submodule foreach "git commit -am "auto-commit" || true"').code !== 0) {
         logErrorAndExit('Error: Git submodule commit failed')
     }
     
-    if (exec('git submodule foreach git push').code !== 0) {
+    if (exec('git submodule foreach "git push || true"').code !== 0) {
         logErrorAndExit('Error: Git submodule push failed')
     }
 }
 
-if (exec('git add .').code !== 0) {
-    logErrorAndExit('Error: Git add failed')
-}
-
-if (exec('git commit -am "auto-commit"').code !== 0) {
-    logErrorAndExit('Error: Git commit failed')
-}
-
-if (exec('git push').code !== 0) {
-    logErrorAndExit('Error: Git push failed')
-}
+exec('git add .')
+exec('git commit -am "auto-commit"')
+exec('git push')
 
 log(chalk.green('🎉🎉🎉push successful🎉🎉🎉'))
