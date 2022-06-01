@@ -58,7 +58,8 @@ co(function*() {
                 if (!e.git) {
                     return
                 }
-                if (exec(`git submodule add -b ${e.branch || 'master'} ${e.git}`).code !== 0) {
+
+                if (exec(`git submodule add ${e.branch && e.branch !== 'master' ? `-b ${e.branch}` : ''} ${e.git}`).code !== 0) {
                     logErrorAndExit(`Error: Git submodule add ${e.git} failed`)
                 }
             })
