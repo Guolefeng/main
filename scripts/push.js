@@ -19,7 +19,7 @@ if (test('-e', '.gitmodules')) {
         logErrorAndExit('Error: Git submodule "add failed || true"')
     }
     
-    if (exec('git submodule foreach "git commit -am "auto-commit" || true"').code !== 0) {
+    if (exec('git submodule foreach "git commit -am \"auto-commit\" || true"').code !== 0) {
         logErrorAndExit('Error: Git submodule commit failed')
     }
     
