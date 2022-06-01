@@ -1,4 +1,4 @@
-const { exec, exit, which } = require('shelljs')
+const { exec, exit, which, test } = require('shelljs')
 const chalk = require('chalk')
 
 const log = console.log
@@ -14,16 +14,18 @@ if (!which('git')) {
     logErrorAndExit('Error: sorry, this script requires git')
 }
 
-if (exec('git submodule foreach git add .').code !== 0) {
-    logErrorAndExit('Error: Git submodule add failed')
-}
-
-if (exec('git submodule foreach git commit -am "auto-commit"').code !== 0) {
-    logErrorAndExit('Error: Git submodule commit failed')
-}
-
-if (exec('git submodule foreach git push').code !== 0) {
-    logErrorAndExit('Error: Git submodule push failed')
+if (test('-e', '.gitmodules')) {
+    if (exec('git submodule foreach git add .').code !== 0) {
+        logErrorAndExit('Error: Git submodule add failed')
+    }
+    
+    if (exec('git submodule foreach git commit -am "auto-commit"').code !== 0) {
+        logErrorAndExit('Error: Git submodule commit failed')
+    }
+    
+    if (exec('git submodule foreach git push').code !== 0) {
+        logErrorAndExit('Error: Git submodule push failed')
+    }
 }
 
 if (exec('git add .').code !== 0) {

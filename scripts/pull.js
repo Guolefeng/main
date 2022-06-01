@@ -1,4 +1,4 @@
-const { rm, cp, mkdir, exec, env, which, exit } = require('shelljs')
+const { exec, which, exit } = require('shelljs')
 const chalk = require('chalk')
 
 const log = console.log
@@ -18,12 +18,14 @@ if (exec('git pull').code !== 0) {
     logErrorAndExit('Error: Git pull failed')
 }
 
-if (exec('git submodule foreach git pull').code !== 0) {
-    logErrorAndExit('Error: Git submodule pull failed')
-}
-
-if (exec('git submodule update').code !== 0) {
-    logErrorAndExit('Error: Git submodule update failed')
+if (test('-e', '.gitmodules')) {
+    if (exec('git submodule foreach git pull').code !== 0) {
+        logErrorAndExit('Error: Git submodule pull failed')
+    }
+    
+    if (exec('git submodule update').code !== 0) {
+        logErrorAndExit('Error: Git submodule update failed')
+    }
 }
 
 log(chalk.green('🎉🎉🎉pull successful🎉🎉🎉'))
