@@ -15,13 +15,8 @@ if (!which('git')) {
 }
 
 // 需要先暂存 .gitmodules 文件, 否则会报错: fatal: please stage your changes to .gitmodules or stash them to proceed
-if (exec('git add .').code !== 0) {
-    logErrorAndExit('Error: Git add failed')
-}
-
-if (exec('git commit -am "auto-commit before remove"').code !== 0) {
-    logErrorAndExit('Error: Git commit failed')
-}
+exec('git add .')
+exec('git commit -am "auto-commit before remove"')
 
 const gitmodules = grep('-v', /submodule|url|branch/, ['.gitmodules'])
 if (gitmodules.code === 0) {
