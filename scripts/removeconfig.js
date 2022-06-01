@@ -46,5 +46,5 @@ if (gitmodules.code === 0) {
         logErrorAndExit('Error: rm -rf failed')
     }
 
-    log(chalk.green('🎉🎉🎉remove config successful🎉🎉🎉'))
+    log(chalk.green('🎉🎉🎉 remove config successful! 🎉🎉🎉'))
 }

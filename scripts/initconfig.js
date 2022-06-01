@@ -82,7 +82,7 @@ co(function*() {
             }
             log(chalk.green('push到主仓库成功'))
 
-            log(chalk.green('🎉🎉🎉初始化产品配置信息成功!🎉🎉🎉'))
+            log(chalk.green('🎉🎉🎉 初始化产品配置信息成功! 🎉🎉🎉'))
 
             process.exit()
         } else {

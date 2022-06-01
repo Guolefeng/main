@@ -28,4 +28,4 @@ if (test('-e', '.gitmodules')) {
     }
 }
 
-log(chalk.green('🎉🎉🎉pull successful🎉🎉🎉'))
+log(chalk.green('🎉🎉🎉 pull successful! 🎉🎉🎉'))

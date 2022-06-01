@@ -32,4 +32,4 @@ exec('git add .')
 exec('git commit -am "auto-commit"')
 exec('git push')
 
-log(chalk.green('🎉🎉🎉push successful🎉🎉🎉'))
+log(chalk.green('🎉🎉🎉 push successful! 🎉🎉🎉'))
