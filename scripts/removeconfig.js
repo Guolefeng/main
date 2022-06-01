@@ -38,16 +38,16 @@ if (gitmodules.code === 0) {
         //     logErrorAndExit('Error: Git rm --cache failed')
         // }
         // 删除submodule目录
-        if (exec(`rm -rf --ignore-unmatch ${path}`).code !== 0) {
+        if (exec(`rm -rf ${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
         }
         // 删除.git/modules对应的submodule目录
-        if (exec(`rm -rf --ignore-unmatch .git/modules/${path}`).code !== 0) {
+        if (exec(`rm -rf .git/modules/${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
         }
     })
     // 删除.gitmodules文件
-    if (exec(`rm -rf --ignore-unmatch .gitmodules`).code !== 0) {
+    if (exec(`rm -rf .gitmodules`).code !== 0) {
         logErrorAndExit('Error: rm -rf failed')
     }
 
