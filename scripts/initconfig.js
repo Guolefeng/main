@@ -33,16 +33,16 @@ co(function*() {
                 name: 'xxx',
                 menus: [],
                 components: [{
-                    git: 'https://github.com/Guolefeng/sub1.git',
+                    git: 'git@github.com:Guolefeng/sub1.git',
                     branch: 'dev',
                 }, {
                     git: '',
                     branch: '',
                 }, {
-                    git: 'https://github.com/Guolefeng/sub2.git',
+                    git: 'git@github.com:Guolefeng/sub2.git',
                     branch: 'feature',
                 },{
-                    git: 'https://github.com/Guolefeng/sub3.git',
+                    git: 'git@github.com:Guolefeng/sub3.git',
                     branch: 'master',
                 }]
             }
