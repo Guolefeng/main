@@ -33,10 +33,10 @@ if (gitmodules.code === 0) {
     }
     submodulePaths.forEach((path) => {
         log(path)
-        // 删除submodule缓存
-        // if (exec(`git rm -rf ${path}`).code !== 0) {
-        //     logErrorAndExit('Error: Git rm --cache failed')
-        // }
+        // 删除submodule
+        if (exec(`git rm -rf ${path}`).code !== 0) {
+            logErrorAndExit('Error: Git rm failed')
+        }
         // 删除submodule目录
         if (exec(`rm -rf ${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
