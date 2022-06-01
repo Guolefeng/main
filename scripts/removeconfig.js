@@ -34,7 +34,7 @@ if (gitmodules.code === 0) {
     submodulePaths.forEach((path) => {
         log(path)
         // 删除submodule缓存
-        if (exec(`git rm --cached --ignore-unmatch ${path}`).code !== 0) {
+        if (exec(`git rm -rf ${path}`).code !== 0) {
             logErrorAndExit('Error: Git rm --cache failed')
         }
         // 删除submodule目录
