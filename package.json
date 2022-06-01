@@ -6,7 +6,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lele": "node scripts/lele.js"
+    "initconfig": "node scripts/initconfig.js",
+    "pull": "node scripts/pull.js",
+    "push": "node scripts/push.js",
+    "removeconfig": "node scripts/removeconfig.js"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
