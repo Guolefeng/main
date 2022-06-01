@@ -14,18 +14,6 @@ if (!which('git')) {
     logErrorAndExit('Error: sorry, this script requires git')
 }
 
-if (exec('git add .').code !== 0) {
-    logErrorAndExit('Error: Git add failed')
-}
-
-if (exec('git commit -am "auto-commit"').code !== 0) {
-    logErrorAndExit('Error: Git commit failed')
-}
-
-if (exec('git push').code !== 0) {
-    logErrorAndExit('Error: Git push failed')
-}
-
 if (exec('git submodule foreach git add .').code !== 0) {
     logErrorAndExit('Error: Git submodule add failed')
 }
@@ -36,6 +24,18 @@ if (exec('git submodule foreach git commit -am "auto-commit"').code !== 0) {
 
 if (exec('git submodule foreach git push').code !== 0) {
     logErrorAndExit('Error: Git submodule push failed')
+}
+
+if (exec('git add .').code !== 0) {
+    logErrorAndExit('Error: Git add failed')
+}
+
+if (exec('git commit -am "auto-commit"').code !== 0) {
+    logErrorAndExit('Error: Git commit failed')
+}
+
+if (exec('git push').code !== 0) {
+    logErrorAndExit('Error: Git push failed')
 }
 
 log(chalk.green('🎉🎉🎉push successful🎉🎉🎉'))
