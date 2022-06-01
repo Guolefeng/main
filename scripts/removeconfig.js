@@ -22,11 +22,6 @@ const gitmodules = grep('-v', /submodule|url|branch/, ['.gitmodules'])
 if (gitmodules.code === 0) {
     const submodulePaths = gitmodules.stdout.replace(/\s/g, '').split('path=')
     submodulePaths.unshift()
-    // submodulePaths.forEach((path) => {
-    //     if (exec(`git rm --cached ${path}`).code !== 0) {
-    //         logErrorAndExit('Error: Git rm failed')
-    //     }
-    // })
     // 逆初始化submodule
     if (exec(`git submodule deinit --all`).code !== 0) {
         logErrorAndExit('Error: git submodule deinit  failed')
