@@ -27,13 +27,6 @@ if (gitmodules.code === 0) {
         logErrorAndExit('Error: git submodule deinit  failed')
     }
     submodulePaths.forEach((path) => {
-        // 删除submodule
-        if (exec(`git rm --cached ${path}`).code !== 0) {
-            logErrorAndExit('Error: Git rm failed')
-        }
-        if (exec(`git rm ${path}`).code !== 0) {
-            logErrorAndExit('Error: Git rm failed')
-        }
         // 删除submodule目录
         if (exec(`rm -rf ${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
