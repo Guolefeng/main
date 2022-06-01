@@ -1,0 +1,11 @@
+[submodule "src/sub1"]
+	path = src/sub1
+	url = git@github.com:Guolefeng/sub1.git
+	branch = dev
+[submodule "src/sub2"]
+	path = src/sub2
+	url = git@github.com:Guolefeng/sub2.git
+	branch = feature
+[submodule "src/sub3"]
+	path = src/sub3
+	url = git@github.com:Guolefeng/sub3.git
