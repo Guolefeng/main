@@ -23,34 +23,35 @@ if (gitmodules.code === 0) {
     const submodulePaths = gitmodules.stdout.replace(/\s/g, '').split('path=')
     submodulePaths.unshift()
     submodulePaths.forEach((path) => {
+        log('----', path)
         // 删除submodule
-        if (exec(`git rm --cached ${path}`).code !== 0) {
-            logErrorAndExit('Error: Git rm failed')
-        }
+        // if (exec(`git rm --cached ${path}`).code !== 0) {
+        //     logErrorAndExit('Error: Git rm failed')
+        // }
     })
-    // 逆初始化submodule
-    if (exec(`git submodule deinit --all`).code !== 0) {
-        logErrorAndExit('Error: git submodule deinit  failed')
-    }
-    submodulePaths.forEach((path) => {
-        // 删除submodule目录
-        if (exec(`rm -rf ${path}`).code !== 0) {
-            logErrorAndExit('Error: rm -rf failed')
-        }
-        // 删除.git/modules对应的submodule目录
-        if (exec(`rm -rf .git/modules/${path}`).code !== 0) {
-            logErrorAndExit('Error: rm -rf failed')
-        }
-    })
-    // 删除.gitmodules文件
-    if (exec(`rm -rf .gitmodules`).code !== 0) {
-        logErrorAndExit('Error: rm -rf failed')
-    }
+    // // 逆初始化submodule
+    // if (exec(`git submodule deinit --all`).code !== 0) {
+    //     logErrorAndExit('Error: git submodule deinit  failed')
+    // }
+    // submodulePaths.forEach((path) => {
+    //     // 删除submodule目录
+    //     if (exec(`rm -rf ${path}`).code !== 0) {
+    //         logErrorAndExit('Error: rm -rf failed')
+    //     }
+    //     // 删除.git/modules对应的submodule目录
+    //     if (exec(`rm -rf .git/modules/${path}`).code !== 0) {
+    //         logErrorAndExit('Error: rm -rf failed')
+    //     }
+    // })
+    // // 删除.gitmodules文件
+    // if (exec(`rm -rf .gitmodules`).code !== 0) {
+    //     logErrorAndExit('Error: rm -rf failed')
+    // }
 
-    // 删除产品配置文件
-    if (exec(`rm -rf src/productConfig.json`).code !== 0) {
-        logErrorAndExit('Error: rm -rf failed')
-    }
+    // // 删除产品配置文件
+    // if (exec(`rm -rf src/productConfig.json`).code !== 0) {
+    //     logErrorAndExit('Error: rm -rf failed')
+    // }
 
     log(chalk.green('🎉🎉🎉remove config successful🎉🎉🎉'))
 }
