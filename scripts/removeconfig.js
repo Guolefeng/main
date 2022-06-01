@@ -28,26 +28,26 @@ if (gitmodules.code === 0) {
     const submodulePaths = gitmodules.stdout.replace(/\s/g, '').split('path=')
     submodulePaths.unshift()
     // 逆初始化submodule
-    if (exec(`git submodule deinit --all`).code !== 0) {
+    if (exec(`git submodule deinit --all --ignore-unmatch`).code !== 0) {
         logErrorAndExit('Error: git submodule deinit  failed')
     }
     submodulePaths.forEach((path) => {
         log(path)
         // 删除submodule缓存
-        if (exec(`git rm --cached ${path}`).code !== 0) {
+        if (exec(`git rm --cached --ignore-unmatch ${path}`).code !== 0) {
             logErrorAndExit('Error: Git rm --cache failed')
         }
         // 删除submodule目录
-        if (exec(`rm -rf ${path}`).code !== 0) {
+        if (exec(`rm -rf --ignore-unmatch ${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
         }
         // 删除.git/modules对应的submodule目录
-        if (exec(`rm -rf .git/modules/${path}`).code !== 0) {
+        if (exec(`rm -rf --ignore-unmatch .git/modules/${path}`).code !== 0) {
             logErrorAndExit('Error: rm -rf failed')
         }
     })
     // 删除.gitmodules文件
-    if (exec(`rm -rf .gitmodules`).code !== 0) {
+    if (exec(`rm -rf --ignore-unmatch .gitmodules`).code !== 0) {
         logErrorAndExit('Error: rm -rf failed')
     }
 
