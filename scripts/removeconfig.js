@@ -35,7 +35,7 @@ if (gitmodules.code === 0) {
         log(path)
         // 删除submodule
         if (exec(`git rm --cached ${path}`).code !== 0) {
-            logErrorAndExit('Error: Git rm failed')
+            logErrorAndExit('Error: Git rm --cached failed')
         }
         // 删除submodule目录
         if (exec(`rm -rf ${path}`).code !== 0) {
