@@ -23,48 +23,35 @@ if (test('-e', '.gitmodules')) {
 // 根据版本id获取产品版本配置信息
 const fetchProductConfig = (versionId) => {
     return `
-        curl 'http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId} '
+        curl 'http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId}'
     `
 }
 
 co(function*() {
     const versionId = yield prompt('please input product version id and then click Enter: ')
     exec(fetchProductConfig(versionId), { silent: true }, (code, stdout) => {
-        if (code === 0) {
-            log('result: ', stdout)
-            exit(1)
-            const product = {
-                code: 'xxx',
-                name: 'xxx',
-                menus: [],
-                components: [{
-                    git: 'git@github.com:Guolefeng/sub1.git',
-                    branch: 'dev',
-                }, {
-                    git: '',
-                    branch: '',
-                }, {
-                    git: 'git@github.com:Guolefeng/sub2.git',
-                    branch: 'feature',
-                },{
-                    git: 'git@github.com:Guolefeng/sub3.git',
-                    branch: 'master',
-                }]
-            }
+        const res = JSON.parse(stdout)
+        if (code === 0 && res.code === "0") {
+            const product = res.data
             cd('src')
-
             log(chalk.green('将产品配置信息写入配置文件: '))
             touch('productConfig.json')
             exec(`echo '${JSON.stringify(product)}' >> productConfig.json`)
             log(chalk.green('写入配置文件成功!'))
 
             log(chalk.green('为产品添加组件Git子模块:'))
-            product.components.forEach((e) => {
-                if (!e.git) {
+            product.componentVersionList.forEach((e) => {
+                if (!e.frontSourceRepository) {
+                    log(chalk.yellow(`${e.name}组件的前端源码仓库是空地址`))
                     return
                 }
 
-                if (exec(`git submodule add ${e.branch && e.branch !== 'master' ? `-b ${e.branch}` : ''} ${e.git}`).code !== 0) {
+                if (!/(?<=\/)[^\/]+(?=\.git)/.test(e.frontSourceRepository)) {
+                    log(chalk.yellow(`${e.name}组件的前端源码仓库${e.frontSourceRepository}是无效地址`))
+                    return
+                }
+
+                if (exec(`git submodule add ${e.frontReleaseBranch && e.frontReleaseBranch !== 'master' ? `-b ${e.frontReleaseBranch}` : ''} ${e.frontSourceRepository}`).code !== 0) {
                     logErrorAndExit(`Error: Git submodule add ${e.git} failed`)
                 }
             })
