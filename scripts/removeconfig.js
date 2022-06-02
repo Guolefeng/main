@@ -1,4 +1,4 @@
-const { exec, which, exit, cd, touch, grep } = require('shelljs')
+const { exec, which, exit, grep } = require('shelljs')
 const chalk = require('chalk')
 
 const log = console.log
