@@ -1,4 +1,4 @@
-const { exec, which, exit, cd, touch } = require('shelljs')
+const { exec, which, exit, cd, touch, test } = require('shelljs')
 const chalk = require('chalk')
 const co = require('co')
 const prompt = require('co-prompt')
@@ -16,18 +16,23 @@ if (!which('git')) {
     logErrorAndExit('Error: sorry, this script requires git')
 }
 
-// 获取产品配置信息
-const fetchProductConfig = (productCode) => {
+if (test('-e', '.gitmodules')) {
+    logErrorAndExit('已经初始化完成了, 如要再次初始化请先执行: npm run removeconfig 来移除初始化配置')
+}
+
+// 根据版本id获取产品版本配置信息
+const fetchProductConfig = (versionId) => {
     return `
-        curl 'http://cimcube-gtw-dev.dgct.glodon.com/bcp-common/dict/batch'
+        curl 'http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId} '
     `
 }
 
 co(function*() {
-    const productCode = yield prompt('please input product code and then click Enter: ')
-    exec(fetchProductConfig(productCode), { silent: true }, (code, stdout) => {
+    const versionId = yield prompt('please input product version id and then click Enter: ')
+    exec(fetchProductConfig(versionId), { silent: true }, (code, stdout) => {
         if (code === 0) {
-            // log('result: ', stdout)
+            log('result: ', stdout)
+            exit(1)
             const product = {
                 code: 'xxx',
                 name: 'xxx',
