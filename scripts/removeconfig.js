@@ -40,11 +40,11 @@ if (gitmodules.code === 0) {
     if (exec(`rm -rf .gitmodules`).code !== 0) {
         logErrorAndExit('Error: rm -rf failed')
     }
-
-    // 删除产品配置文件
-    if (exec(`rm -rf src/productConfig.json`).code !== 0) {
-        logErrorAndExit('Error: rm -rf failed')
-    }
-
-    log(chalk.green('🎉🎉🎉 remove config successful! 🎉🎉🎉'))
 }
+
+// 删除产品配置文件
+if (exec(`rm -rf src/productConfig.json`).code !== 0) {
+    logErrorAndExit('Error: rm -rf failed')
+}
+
+log(chalk.green('🎉🎉🎉 remove config successful! 🎉🎉🎉'))
