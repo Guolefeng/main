@@ -33,7 +33,7 @@ const fetchProductConfig = (versionId) => {
 
 co(function*() {
     const versionId = yield prompt('please input product version id and then click Enter: ')
-    exec(`curl http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId}`, { silent: true }, (code, stdout) => {
+    exec(fetchProductConfig(versionId), { silent: true }, (code, stdout) => {
         log('====', code, stdout)
         if (code === 0 && stdout) {
             const res = JSON.parse(stdout)
