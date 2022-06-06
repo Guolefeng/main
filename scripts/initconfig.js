@@ -20,20 +20,10 @@ if (test('-e', '.gitmodules')) {
     logErrorAndExit('已经初始化完成, 如要再次初始化请先执行: npm run removeconfig 来移除初始化配置')
 }
 
-// 根据版本id获取产品版本配置信息
-const fetchProductConfig = (versionId) => {
-    return `
-        curl http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId}
-    `
-}
-
-// exec('curl http://cimcube-gtw-dev.dgct.glodon.com/bcp-common/dict/batch', { silent: true }, (code, stdout) => {
-//     log('=========', code, stdout)
-// })
-
 co(function*() {
     const versionId = yield prompt('please input product version id and then click Enter: ')
-    exec(fetchProductConfig(versionId), { silent: true }, (code, stdout) => {
+    // 根据版本id获取产品版本配置信息
+    exec(`curl http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId}`, { silent: true }, (code, stdout) => {
         log('====', code, stdout)
         if (code === 0 && stdout) {
             const res = JSON.parse(stdout)
