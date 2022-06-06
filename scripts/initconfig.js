@@ -31,7 +31,7 @@ co(function*() {
             cd('src')
             log(chalk.green('将产品配置信息写入配置文件: '))
             touch('productConfig.json')
-            exec(`echo '${JSON.stringify(product)}' >> productConfig.json`)
+            exec(`echo ${JSON.stringify(product)} >> productConfig.json`)
             log(chalk.green('写入配置文件成功!'))
 
             log(chalk.green('为产品添加组件Git子模块:'))
