@@ -23,7 +23,7 @@ if (test('-e', '.gitmodules')) {
 co(function*() {
     const versionId = yield prompt('please input product version id and then click Enter: ')
     // 根据版本id获取产品版本配置信息
-    exec(`curl http://cimcube-gtw-dev.dgct.glodon.com/bcp-console/busi-productVersion/${versionId}`, { silent: true }, (code, stdout) => {
+    exec(`curl http://xxx/${versionId}`, { silent: true }, (code, stdout) => {
         if (code === 0 && stdout) {
             const res = JSON.parse(stdout)
             if (res.code !== "0") { return }
