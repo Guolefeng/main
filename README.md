@@ -13,3 +13,8 @@
 * npm run pull (自动化拉取主仓库对应分支代码和子仓库对应分支代码)
 
 * npm run push (自动化将子仓库修改推送到对应远程分支以及将主仓库修改推送对应到远程分支)
+
+### create-react-app 配置多页面应用
+
+* 参考地址1：https://www.jianshu.com/p/9a4b336b1410
+* 参考地址2：https://cloud.tencent.com/developer/article/1745785
